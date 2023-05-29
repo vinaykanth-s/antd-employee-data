@@ -12,8 +12,11 @@ import {
 import 'antd/dist/antd.css'
 import moment from 'moment'
 import useEmployeeData from '../context/EmployeeContext'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
+const formItemStyle = {
+  marginBottom: 0,
+}
 const EmployeeList = () => {
   const {
     employeeData = [],
@@ -22,7 +25,7 @@ const EmployeeList = () => {
     saveEditData,
     currentEmpData,
   } = useEmployeeData()
-  const { joiningDate, ...empData } = currentEmpData
+  const { joiningDate } = currentEmpData
   const formattedJoiningDate = moment(joiningDate, 'DD-MM-YYYY').toDate()
 
   const [currentRecordId, setCurrentRecordId] = useState('')
@@ -59,12 +62,12 @@ const EmployeeList = () => {
       render: (text, record) => {
         if (currentRecordId === record.id) {
           return (
-            <Form.Item name="id">
+            <Form.Item name="id" style={formItemStyle}>
               <Input disabled />
             </Form.Item>
           )
         } else {
-          return <p>{text}</p>
+          return <>{text}</>
         }
       },
     },
@@ -84,12 +87,13 @@ const EmployeeList = () => {
                   message: 'Name Cannot Be Empty!',
                 },
               ]}
+              style={formItemStyle}
             >
               <Input />
             </Form.Item>
           )
         } else {
-          return <p>{text}</p>
+          return <>{text}</>
         }
       },
     },
@@ -112,12 +116,13 @@ const EmployeeList = () => {
                   message: `Please Enter Valid Email!`,
                 },
               ]}
+              style={formItemStyle}
             >
               <Input />
             </Form.Item>
           )
         } else {
-          return <p>{text}</p>
+          return <>{text}</>
         }
       },
     },
@@ -138,12 +143,13 @@ const EmployeeList = () => {
                   message: 'Aadhar should be of 10 digits',
                 },
               ]}
+              style={formItemStyle}
             >
               <InputNumber style={{ width: '100%' }} placeholder="Aadhar" />
             </Form.Item>
           )
         } else {
-          return <p>{text}</p>
+          return <>{text}</>
         }
       },
     },
@@ -164,12 +170,13 @@ const EmployeeList = () => {
                   message: 'PAN number should only be an Alpha-Numeric',
                 },
               ]}
+              style={formItemStyle}
             >
               <Input placeholder="PAN" />
             </Form.Item>
           )
         } else {
-          return <p>{text}</p>
+          return <>{text}</>
         }
       },
     },
@@ -186,6 +193,7 @@ const EmployeeList = () => {
               rules={[
                 { required: true, message: `Please select at least one!` },
               ]}
+              style={formItemStyle}
             >
               <Select
                 options={[
@@ -202,7 +210,7 @@ const EmployeeList = () => {
             </Form.Item>
           )
         } else {
-          return <p>{text}</p>
+          return <>{text}</>
         }
       },
     },
@@ -219,6 +227,7 @@ const EmployeeList = () => {
                 { required: true, message: 'Please Select A Valid Date!' },
               ]}
               name="joiningDate"
+              style={formItemStyle}
             >
               <DatePicker
                 format={'DD-MM-YYYY'}
@@ -232,7 +241,7 @@ const EmployeeList = () => {
             </Form.Item>
           )
         } else {
-          return <p>{text}</p>
+          return <>{text}</>
         }
       },
     },
@@ -248,9 +257,9 @@ const EmployeeList = () => {
             <Button htmlType="submit" type="link">
               Save
             </Button>
-            <Button type="link" onClick={cancel}>
-              Cancel
-            </Button>
+            <Popconfirm title="Sure to cancel?" onConfirm={cancel}>
+              <a>Cancel</a>
+            </Popconfirm>
           </span>
         ) : (
           <Typography.Link

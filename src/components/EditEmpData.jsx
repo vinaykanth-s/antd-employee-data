@@ -13,7 +13,7 @@ const EditEmpData = () => {
         open={displayModalEdit}
         onCancel={resetState}
         footer={null}
-        width={'70vw'}
+        width={'90vw'}
         centered
       >
         <EmpFormData />

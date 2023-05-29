@@ -46,7 +46,7 @@ const EmpFormData = () => {
       >
         <Row gutter={48}>
           <Col xs={24} sm={5}>
-            <Typography style={{ textAlign: 'right' }}>
+            <Typography style={{ textAlign: 'left' }}>
               <Typography.Title> Employee Details</Typography.Title>
             </Typography>
           </Col>
